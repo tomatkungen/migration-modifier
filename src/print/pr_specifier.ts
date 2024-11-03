@@ -26,7 +26,8 @@ export const pr_specifier = (root: Collection<any>, specifier: ImportSpecifier |
             c_space(4, `ìmported.${specifier.imported.type} - <${pr_green(importedName)}>`)
             c_space(4, `local.${specifier.local?.type} - <${pr_green(localName)}>`);
             // c_space(4, `code - import { ${importedName} as ${localName} } from "${sourceValue}"`)
-            util_code_line(4, 'GREEN', root, specifier.loc)
+            util_code_line(4, 'GREEN', root, specifier.imported.loc)
+            util_code_line(4, 'GREEN', root, specifier.local?.loc)
         }
     }
 
@@ -35,7 +36,7 @@ export const pr_specifier = (root: Collection<any>, specifier: ImportSpecifier |
 
         c_space(4, `local.${specifier.local?.type} - <${pr_green(localName)}>`);
         // c_space(4, `code - import ${localName} from "${sourceValue}"`)
-        util_code_line(4, 'GREEN', root, specifier.loc)
+        util_code_line(4, 'GREEN', root, specifier.local?.loc)
     }
 
     if (ImportNamespaceSpecifier.check(specifier)) {
@@ -43,7 +44,7 @@ export const pr_specifier = (root: Collection<any>, specifier: ImportSpecifier |
 
         c_space(3, `local.${specifier.local?.type} - <${pr_green(localName)}>`);
         // c_space(4, `code - import * as ${localName} from "${sourceValue}"`)
-        util_code_line(4, 'GREEN', root, specifier.loc);
+        util_code_line(4, 'GREEN', root, specifier.local?.loc);
     }
 
     c_return()

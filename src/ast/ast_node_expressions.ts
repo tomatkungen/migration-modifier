@@ -5,7 +5,8 @@ import jscodeshift, {
     ImportDeclaration,
     ImportDefaultSpecifier,
     ImportSpecifier,
-    MemberExpression
+    MemberExpression,
+    ImportNamespaceSpecifier
 } from "jscodeshift";
 import { pr_specifier } from "../print/pr_specifier";
 import { c_space } from "../util/util_console_log";
@@ -14,17 +15,21 @@ import { pr_member_func_expression } from "../print/pr_member_func_expression";
 import { pr_import_declaration } from "../print/pr_import_declaration";
 import { pr_call_expression } from "../print/pr_call_expression";
 
-export const ast_get_import_from = (
+type ASTnodeExpressions = (ASTPath<MemberExpression> | ASTPath<CallExpression>)[]
+
+export const ast_node_expressions = (
     root: Collection<any>,
     importName: string,
     fromName: string,
     print: boolean = false
-) => {
+): ASTnodeExpressions => {
 
     // Get all Impors
     const importDeclarations = ast_import_declarations(root)
 
     print && c_space(0, 'ImportDeclarations');
+
+    const astNodeExpressions: ASTnodeExpressions = []
 
     // Loop all import declarations
     importDeclarations.forEach((importDeclaration) => {
@@ -35,23 +40,29 @@ export const ast_get_import_from = (
         print && pr_import_declaration(root, importDeclaration)
 
         // Get module functions
-        geModuleNamesByImportDeclaration(
+        const astExpressions = getExpressions(
             root,
             importDeclaration,
             importName,
             print
         );
+
+        astExpressions.forEach((astNodeExpression) => {
+            astNodeExpressions.push(astNodeExpression);
+        })
     });
+
+    return astNodeExpressions;
 }
 
-const geModuleNamesByImportDeclaration = (
+const getExpressions = (
     root: Collection<any>,
     importDeclaration: ASTPath<ImportDeclaration>,
     importName: string,
     print: boolean = false
-) => {
+): (ASTPath<MemberExpression> | ASTPath<CallExpression>)[]=> {
 
-    const astNodeExpression: (ASTPath<MemberExpression> | ASTPath<CallExpression>)[] = []
+    const astNodeExpressions: ASTnodeExpressions = []
 
     importDeclaration.node.specifiers?.forEach((specifier) => {
 
@@ -64,17 +75,17 @@ const geModuleNamesByImportDeclaration = (
                 }
             }
             ).forEach((callExpression) => {
-                if (specifier.imported.name !== importName) 
+                if (specifier.imported.name !== importName)
                     return;
 
-                // print Import
+                // Print Import
                 print && pr_specifier(root, specifier);
 
                 if (jscodeshift.Identifier.check(callExpression.value.callee)) {
 
                     print && pr_call_expression(5, root, callExpression)
 
-                    astNodeExpression.push(callExpression);
+                    astNodeExpressions.push(callExpression);
                     return;
                 }
             })
@@ -86,20 +97,29 @@ const geModuleNamesByImportDeclaration = (
                 object: { name: specifier.local?.name }, // type: 'Identifier',
                 property: { name: importName } // type: 'Identifier'
             }).forEach((memberFuncExpression) => {
-                // print Import 
+                // Print Import 
                 print && pr_specifier(root, specifier);
 
                 print && pr_member_func_expression(5, root, memberFuncExpression);
 
-                astNodeExpression.push(memberFuncExpression);
+                astNodeExpressions.push(memberFuncExpression);
             })
         }
 
-        // if (ImportNamespaceSpecifier.check(specifier) && specifier.local?.name === moduleName) {
-        //     importName.importName = specifier.local?.name ?? ''
-        //     importName.localName = specifier.local?.name ?? ''
-        //     importName.moduleType = 'ImportNamespace'
-        // }
+        if (ImportNamespaceSpecifier.check(specifier)) {
+            root.find(jscodeshift.MemberExpression, {
+                object: { name: specifier.local?.name }, // type: 'Identifier',
+                property: { name: importName } // type: 'Identifier'
+            }).forEach((memberFuncExpression) => {
+                // Print Import 
+                print && pr_specifier(root, specifier);
+
+                print && pr_member_func_expression(5, root, memberFuncExpression);
+
+                astNodeExpressions.push(memberFuncExpression);
+            })
+        }
     })
 
+    return astNodeExpressions;
 }

@@ -9,7 +9,10 @@ export const pr_call_expression = (space: number, root: Collection<any>, callExp
     util_code_line(space, 'YELLOW', root, callExpression.value.loc)
     
     if (jscodeshift.Identifier.check(callExpression.value.callee)) {
-        c_space(space + 1, `callee.${callExpression.value.callee.type} - <${pr_green(callExpression.value.callee.name)}>`);
+        const calleeType = callExpression.value.callee.type
+        const calleeName = callExpression.value.callee.name
+
+        c_space(space + 1, `callee.${calleeType} - <${pr_green(calleeName)}>`);
         util_code_line(space + 1, 'GREEN', root, callExpression.value.callee.loc)
 
         c_return()

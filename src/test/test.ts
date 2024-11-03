@@ -3,7 +3,7 @@ import { file_read } from "../file/file_read";
 import path from 'path';
 // import { pr_source } from "../print/pr_source";
 import { ast_import_declarations } from "../ast/ast_import_declarations";
-import { ast_get_import_from } from "../ast/ast_get_import_name";
+import { ast_node_expressions } from "../ast/ast_node_expressions";
 
 // Pick language
 const codeLanguage = util_code_language('typescript-react')
@@ -16,10 +16,14 @@ const file = file_read(filepath)
 const root = codeLanguage(file)
 
 // Get all imports and print
-// const _importDeclarations = ast_import_declarations(root, true)
+const importDeclarations = ast_import_declarations(root, true)
+
+console.log('importDeclarations', importDeclarations.length)
 
 // Get import map
-const _res = ast_get_import_from(root, 'map', 'lodash', true)
+const astNodeExpressions = ast_node_expressions(root, 'map', 'lodash', true)
+
+console.log('astNodeExpressions', astNodeExpressions.length)
 
 // console.log('res', res);
 

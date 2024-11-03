@@ -23,6 +23,7 @@ export const MyFunction = ({ label }: MyFunction) => {
     const grodan2 = map.map([4, 3, 2, 1], (i) => i * 2)
 
     const grodan1 = Maps.map([], () => { });
+    const grodan3 = Maps.filter([], () => { });
 
     return (
         <>
