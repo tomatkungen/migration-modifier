@@ -1,5 +1,5 @@
 import jscodeshift, { Collection, ImportDeclaration } from "jscodeshift";
-import { pr_all_imports } from "../print/pr_all_imports";
+import { pr_import_declarations } from "../print/pr_import_declarations";
 
 /**
  *  Get all ImportDeclaration[]
@@ -39,10 +39,13 @@ import { pr_all_imports } from "../print/pr_all_imports";
  * 
  *  @return {Array} ImportDeclaration
  */
-export const mgr_get_all_imports = (root: Collection<any>, print: boolean = false): Collection<ImportDeclaration> => {
+export const ast_import_declarations = (root: Collection<any>, print: boolean = false): Collection<ImportDeclaration> => {
     const importDeclarations = root.find(jscodeshift.ImportDeclaration);
 
-    print && pr_all_imports(importDeclarations);
+    print && pr_import_declarations(root, importDeclarations);
+    // print && c_space(0, 'ImportDeclarations');
+
+    // print && pr_import_declarations(root, importDeclarations);
 
     return importDeclarations;
 }
