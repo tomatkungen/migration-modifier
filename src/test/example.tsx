@@ -33,10 +33,12 @@ export const MyFunction = ({ label }: MyFunction) => {
                 <Box>{apa.join(', ')}</Box>
                 <Box>{apa1}</Box>
                 <Buttons>{label}</Buttons>
+                <Box/>
             </MUI.Box>
             <Box>
                 {label} {` ${myLoop.join(', ')} `}
                 <Buttons>{label}</Buttons>
+                <Box>hejsan</Box>
             </Box>
         </>
     )

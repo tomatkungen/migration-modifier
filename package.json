@@ -4,7 +4,8 @@
     "test": "tsx ./src/test/test.ts"
   },
   "dependencies": {
-    "jscodeshift": "^17.0.0"
+    "jscodeshift": "^17.0.0",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@emotion/react": "^11.13.3",

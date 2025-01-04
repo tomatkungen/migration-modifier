@@ -23,22 +23,24 @@ export const util_code_line = (
 
         if (startLine === index + 1 && index + 1 === endLine) {
             prev.push(
-                `${index + 1}: ${line.slice(0, startColumn)}${COLORS[color]}${line.slice(startColumn, endColumn)}${COLORS.END}${line.slice(endColumn)}`
+                `a${index + 1}: ${line.slice(0, startColumn)}${COLORS[color]}${line.slice(startColumn, endColumn)}${COLORS.END}${line.slice(endColumn)}`
             )
         }
 
         if (startLine === index + 1 && index + 1 !== endLine)
-            prev.push(`${line.slice(0, startColumn)}${COLORS[color]}${line.slice(startColumn)}`)
+            prev.push(`b${index + 1}: ${line.slice(0, startColumn)}${COLORS[color]}${line.slice(startColumn)}${COLORS.END}`)
 
 
         if (endLine === index + 1 && index + 1 !== startLine)
-            prev.push(`${line.slice(0, endColumn)}${COLORS.END}${line.slice(endColumn)}`)
+            prev.push(`c${index + 1}: ${COLORS[color]}${line.slice(0, endColumn)}${COLORS.END}${line.slice(endColumn)}`)
 
         if (startLine < index + 1  && index + 1 < endLine)
-            prev.push(line)
+            prev.push(`d${index + 1}: ${COLORS.MAGENTA}${line}${COLORS.END}`)
 
         return prev;
-    }, []).join('\n')
+    }, [])
 
-    console.log(`${(new Array(space + 1)).join('  ')}`, code)
+    code.forEach((c) => {
+        console.log(`${(new Array(space + 1)).join('  ')}`, c);
+    })
 }
