@@ -1,5 +1,5 @@
 import jscodeshift, { Collection, } from "jscodeshift";
-import { COLORS, COLOR, pr_green, pr_yellow } from "../print/pr_color";
+import { COLORS, COLOR } from "../print/pr_color";
 
 export const util_code_line = (
     space: number = 0,

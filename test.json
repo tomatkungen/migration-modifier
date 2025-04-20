@@ -1,0 +1,158 @@
+{
+    "": {
+        "Users": {
+            "kimkarlsson": {
+                "source": {
+                    "github-desktop-git": {
+                        "app": {
+                            "src": {
+                                "cli": {},
+                                "crash": {},
+                                "lib": {
+                                    "actions-log-parser": {},
+                                    "ci-checks": {},
+                                    "databases": {},
+                                    "editors": {},
+                                    "git": {},
+                                    "helpers": {},
+                                    "highlighter": {},
+                                    "logging": {
+                                        "main": {},
+                                        "renderer": {}
+                                    },
+                                    "markdown-filters": {},
+                                    "notifications": {},
+                                    "process": {},
+                                    "progress": {},
+                                    "shells": {},
+                                    "squash": {},
+                                    "ssh": {},
+                                    "stats": {},
+                                    "stores": {
+                                        "helpers": {},
+                                        "updates": {}
+                                    },
+                                    "trampoline": {}
+                                },
+                                "main-process": {
+                                    "menu": {}
+                                },
+                                "models": {
+                                    "diff": {}
+                                },
+                                "ui": {
+                                    "about": {},
+                                    "acknowledgements": {},
+                                    "add-repository": {},
+                                    "app-menu": {},
+                                    "autocompletion": {},
+                                    "banners": {},
+                                    "branches": {},
+                                    "changes": {},
+                                    "choose-fork-settings": {},
+                                    "cli-installed": {},
+                                    "clone-repository": {},
+                                    "create-branch": {},
+                                    "create-tag": {},
+                                    "delete-branch": {},
+                                    "delete-tag": {},
+                                    "dialog": {},
+                                    "diff": {
+                                        "image-diffs": {},
+                                        "syntax-highlighting": {}
+                                    },
+                                    "discard-changes": {},
+                                    "dispatcher": {},
+                                    "editor": {},
+                                    "generic-git-auth": {},
+                                    "history": {},
+                                    "install-git": {},
+                                    "lfs": {},
+                                    "lib": {
+                                        "author-input": {},
+                                        "conflicts": {},
+                                        "list": {},
+                                        "test-ui-components": {},
+                                        "vertical-segmented-control": {},
+                                        "input-description": {}
+                                    },
+                                    "merge-conflicts": {},
+                                    "no-repositories": {},
+                                    "notifications": {},
+                                    "octicons": {},
+                                    "preferences": {},
+                                    "publish-repository": {},
+                                    "push-needs-pull": {},
+                                    "release-notes": {},
+                                    "remove-repository": {},
+                                    "rename-branch": {},
+                                    "repositories-list": {},
+                                    "repository-settings": {},
+                                    "resizable": {},
+                                    "shell": {},
+                                    "sign-in": {},
+                                    "stashing": {},
+                                    "suggested-actions": {},
+                                    "terms-and-conditions": {},
+                                    "thank-you": {},
+                                    "tutorial": {},
+                                    "untrusted-certificate": {},
+                                    "upstream-already-exists": {},
+                                    "welcome": {},
+                                    "window": {},
+                                    "accessibility": {},
+                                    "change-repository-alias": {},
+                                    "check-runs": {},
+                                    "checkout": {},
+                                    "commit-message": {},
+                                    "drag-elements": {},
+                                    "forks": {},
+                                    "generate-commit-message": {},
+                                    "installing-update": {},
+                                    "invalidated-token": {},
+                                    "keyboard-shortcut": {},
+                                    "local-changes-overwritten": {},
+                                    "multi-commit-operation": {
+                                        "choose-branch": {},
+                                        "dialog": {}
+                                    },
+                                    "open-pull-request": {},
+                                    "rebase": {},
+                                    "repository-rules": {},
+                                    "reset": {},
+                                    "saml-reauth-required": {},
+                                    "ssh": {},
+                                    "stash-changes": {},
+                                    "test-notifications": {},
+                                    "toolbar": {},
+                                    "undo": {},
+                                    "unknown-authors": {},
+                                    "workflow-push-rejected": {}
+                                }
+                            },
+                            "test": {
+                                "helpers": {
+                                    "databases": {},
+                                    "menus": {},
+                                    "stores": {}
+                                },
+                                "unit": {
+                                    "git": {
+                                        "pull": {},
+                                        "rebase": {}
+                                    },
+                                    "main-process": {},
+                                    "progress": {},
+                                    "script": {},
+                                    "stores": {
+                                        "updates": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
