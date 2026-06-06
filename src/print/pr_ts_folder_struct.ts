@@ -1,7 +1,7 @@
-import { TSFolderStruct } from "../file/ts_folder_struct";
+import { TSFolderStructTree } from "../file/ts_folder_struct_tree";
 import { pr_green, pr_yellow } from "./pr_color";
 
-export const pr_ts_folder_struct = (folderStruct: TSFolderStruct, showFiles: boolean = false) => {
+export const pr_ts_folder_struct = (folderStruct: TSFolderStructTree, showFiles: boolean = false) => {
     const res = JSON.stringify(folderStruct, (key, value) => {
         if (showFiles) return value;
 

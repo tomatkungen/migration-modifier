@@ -2,6 +2,8 @@ import ts from "typescript";
 import { ts_parse_config } from "./core/ts_parse_config";
 import { ts_read_config_file } from "./core/ts_read_config_file";
 import { TS_UTIL } from "./ts_util";
+import { ts_engine } from "./core/ts_engine";
+import { TS_RULES } from "./ts_rules";
 
 export class TS_AST {
 
@@ -28,16 +30,29 @@ export class TS_AST {
         )
     }
 
-    public getParsedConfigFiles(): string[] {
-        return (
-            !this.tsParseCommandLine ?
-                [] : 
-                this.tsParseCommandLine.fileNames
+    public searchAll(): TS_RULES {
+        
+        const sourceFiles = ts_engine(
+            this.tsParseCommandLine.fileNames,
+            this.tsParseCommandLine.options
         )
+
+        return new TS_RULES(sourceFiles)
     }
 
-    public getUtil(): TS_UTIL {
-        return this.ts_util;
+    public searchFile(fileNames: string[]): TS_RULES {
+        const result = ts_engine(
+            fileNames,
+            this.tsParseCommandLine.options
+        )
+
+        return new TS_RULES(result)
     }
+
+    public getParsedConfigFiles(): string[] {
+        return (!this.tsParseCommandLine ? [] : this.tsParseCommandLine.fileNames)
+    }
+
+    public getUtil(): TS_UTIL { return this.ts_util; }
 }
 

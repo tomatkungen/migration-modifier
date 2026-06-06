@@ -2,6 +2,8 @@ import ts from "typescript";
 import * as fs from "fs";
 import * as path from "path";
 
+// Example file
+
 // Helper: Recursively traverse the AST
 function findStringLiterals(node: ts.Node, filePath: string, result: string[]): void {
   // Check if the node is a string literal
