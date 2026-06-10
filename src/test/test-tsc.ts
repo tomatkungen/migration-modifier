@@ -7,8 +7,8 @@ import { TS_AST } from "../ast-typescript/ts_ast";
 // import { pr_ts_folder_struct } from "../print/pr_ts_folder_struct";
 
 // Path to the tsconfig.json file
-// const tsConfigPath = path.resolve("tsconfig.json")//
-const tsConfigPath = path.resolve('..', 'github-desktop-git', "tsconfig.json");
+const tsConfigPath = path.resolve("tsconfig.json")
+// const tsConfigPath = path.resolve('..', 'github-desktop-git', "tsconfig.json");
 
 // Create a new TS_AST instance
 const tsEngine = new TS_AST(tsConfigPath);
@@ -16,7 +16,7 @@ const tsEngine = new TS_AST(tsConfigPath);
 // Get the parsed command line options print folder structure
 tsEngine.getUtil().prParseConfigFolders();
 
-// tsEngine.getUtil().prParseConfigFoldersFile();
+tsEngine.getUtil().prParseConfigFoldersFile();
 
 // const res = tsEngine.searchFile(
 //     ['/Users/kimkarlsson/source/github-desktop-git/app/src/models/account.ts']
