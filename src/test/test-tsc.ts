@@ -14,9 +14,11 @@ const tsConfigPath = path.resolve("tsconfig.json")
 const tsEngine = new TS_AST(tsConfigPath);
 
 // Get the parsed command line options print folder structure
-tsEngine.getUtil().prParseConfigFolders();
+// tsEngine.getUtil().prParseConfigFolders();
 
-tsEngine.getUtil().prParseConfigFoldersFile();
+// tsEngine.getUtil().prParseConfigFoldersFile();
+
+tsEngine.getUtil().prParseReactTree();
 
 // const res = tsEngine.searchFile(
 //     ['/Users/kimkarlsson/source/github-desktop-git/app/src/models/account.ts']

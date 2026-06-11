@@ -1,6 +1,8 @@
 import ts from "typescript";
-import { ts_folder_struct_tree } from "../file/ts_folder_struct_tree";
+import { ts_folder_struct_tree } from "../helper/ts_folder_struct_tree";
 import { pr_ts_folder_struct } from "../print/pr_ts_folder_struct";
+import { pr_ts_react_struct } from "../print/pr_ts_react_struct";
+import { ts_react_struct_tree } from "../helper/ts_react_struct_tree";
 
 export class TS_UTIL_PR {
 
@@ -31,9 +33,9 @@ export class TS_UTIL_PR {
         )
     }
 
-    public prParseReactTree(filenames: string[]): void {
+    public prParseReactTree(): void {
         pr_ts_react_struct(
-
+            ts_react_struct_tree(this.tsProgram)
         )
     }
 }

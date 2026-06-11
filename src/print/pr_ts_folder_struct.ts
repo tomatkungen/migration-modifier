@@ -1,4 +1,4 @@
-import { TSFolderStructTree } from "../file/ts_folder_struct_tree";
+import { TSFolderStructTree } from "../helper/ts_folder_struct_tree";
 import { pr_green, pr_yellow } from "./pr_color";
 
 export const pr_ts_folder_struct = (folderStruct: TSFolderStructTree, showFiles: boolean = false) => {

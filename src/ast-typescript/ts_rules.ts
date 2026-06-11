@@ -36,16 +36,16 @@ export class TS_RULES {
             );
 
             // Add start and end line and column
-            tempNodes.forEach((tempNode) => {
+            // tempNodes.forEach((tempNode) => {
 
-                const startPos = sourceFile.getLineAndCharacterOfPosition(tempNode.start)
-                const endPos = sourceFile.getLineAndCharacterOfPosition(tempNode.end)
+            //     const startPos = sourceFile.getLineAndCharacterOfPosition(tempNode.start)
+            //     const endPos = sourceFile.getLineAndCharacterOfPosition(tempNode.end)
 
-                tempNode.startLine = startPos.line + 1;
-                tempNode.startColumn = startPos.character + 1;
-                tempNode.endLine = endPos.line + 1;
-                tempNode.endColumn = endPos.character + 1;
-            })
+            //     tempNode.startLine = startPos.line + 1;
+            //     tempNode.startColumn = startPos.character + 1;
+            //     tempNode.endLine = endPos.line + 1;
+            //     tempNode.endColumn = endPos.character + 1;
+            // })
 
             this.tsNodes.push(...tempNodes);
         })

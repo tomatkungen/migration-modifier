@@ -22,9 +22,13 @@ export const getTSNode = (
     sourceFile: ts.SourceFile,
     parentNode?: ts.LiteralLikeNode,
 ): TS_NODE => {
+    // Get Code line number in file 
+    const startPos = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile))
+    const endPos = sourceFile.getLineAndCharacterOfPosition(node.getEnd())
+
     return {
         filePath,
-        nodeText: 'text' in node && node.text || node.getText(sourceFile),
+        nodeText: getNodeText(node, sourceFile),
         nodeSyntaxKind: ts.SyntaxKind[node.kind],
         parentText: (
             (node.parent && ('text' in node.parent) && typeof node.text === 'string' && node.text) ||
@@ -38,9 +42,25 @@ export const getTSNode = (
         ),
         start: node.getStart(sourceFile),
         end: node.getEnd(),
-        startLine: 0,
-        startColumn: 0,
-        endLine: 0,
-        endColumn: 0
+        startLine: startPos.line + 1,
+        startColumn: startPos.character + 1,
+        endLine: endPos.line + 1,
+        endColumn: endPos.character + 1
     }
+}
+
+const getNodeText = (tsNode: ts.Node, tsSource: ts.SourceFile): string => {
+    if (ts.isJsxElement(tsNode)) {
+        return tsNode.openingElement.tagName.getText(tsSource);
+    }
+
+    if (ts.isJsxSelfClosingElement(tsNode)) {
+        return tsNode.tagName.getText(tsSource);
+    }
+
+    if (ts.isJsxOpeningElement(tsNode)) {
+        return tsNode.tagName.getText(tsSource);
+    }
+
+    return 'text' in tsNode && tsNode.text as string || tsNode.getText(tsSource)
 }
