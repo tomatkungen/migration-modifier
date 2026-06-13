@@ -21,8 +21,10 @@ const tsEngine = new TS_AST(tsConfigPath);
 
 tsEngine.getUtil().prParseReactTree();
 
+// const filePath = path.resolve('..', 'github-desktop-git','app', 'src', 'models','account.ts')
+
 // const res = tsEngine.searchFile(
-//     ['/Users/kimkarlsson/source/github-desktop-git/app/src/models/account.ts']
+//     [filePath]
 // ).find(['ImportClause']).get();
 
 // console.log('res', res);
