@@ -3,31 +3,18 @@ import ts from "typescript";
 import { TS_NODES } from "../ast-typescript/core/ts_node";
 import { ts_source_files } from "../ast-typescript/core/ts_source_files";
 import { ts_scan } from "../ast-typescript/core/ts_scan";
+import { ts_scan_react } from "../ast-typescript/core/ts_scan_react";
 
-export const ts_react_struct_tree = (tsProgram: ts.Program) => {
+export const ts_react_struct_tree = (tsProgram: ts.Program, tsConfigPath: string) => {
     const tsSourceFiles = ts_source_files(tsProgram);
-    
+
     const tsNodes: TS_NODES = [];
 
-    // const recursiveTreeNode = (node: ts.Node) => {
-        // if (ts_is_node(node, ['JsxOpeningElement', 'JsxSelfClosingElement'])) {
-        //     console.log(node.getText())
-        // }
-
-        // if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))
-        //     console.log(node.tagName.getText());
-    //     if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
-    //         const tag = 'text' in node && node.text || node.getText()
-    //         console.log(tag);
-    //     }
-
-    //     ts.forEachChild(node, recursiveTreeNode)
-    // }
-
+    // React render
     for (const tsSourceFile of tsSourceFiles) {
         if (!tsSourceFile.fileName.endsWith('.tsx'))
             continue;
- 
+        console.log('filename', tsSourceFile.fileName)
         ts_scan(
             tsSourceFile,
             tsSourceFile.fileName,
@@ -35,6 +22,12 @@ export const ts_react_struct_tree = (tsProgram: ts.Program) => {
             ['JsxOpeningElement', 'JsxSelfClosingElement'],
             tsSourceFile
         )
+
+        ts_scan_react(tsProgram, tsSourceFile, tsSourceFile)
+    }
+
+    for (const tsNode of tsNodes) {
+        tsNode.filePath = tsNode.filePath.replace(path.dirname(tsConfigPath), '')
     }
 
     return tsNodes;

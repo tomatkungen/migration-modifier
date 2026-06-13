@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "jscodeshift": "^17.0.0",
-    "typescript": "^5.6.3"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@emotion/react": "^11.13.3",

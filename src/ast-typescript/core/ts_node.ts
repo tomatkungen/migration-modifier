@@ -1,4 +1,5 @@
 import ts from "typescript";
+import { ts_node_text } from "./ts_node_text";
 
 export type TS_NODE = {
     filePath: string;
@@ -16,7 +17,7 @@ export type TS_NODE = {
 
 export type TS_NODES = TS_NODE[];
 
-export const getTSNode = (
+export const ts_node = (
     filePath: string,
     node: ts.LiteralLikeNode,
     sourceFile: ts.SourceFile,
@@ -28,7 +29,7 @@ export const getTSNode = (
 
     return {
         filePath,
-        nodeText: getNodeText(node, sourceFile),
+        nodeText: ts_node_text(node, sourceFile),
         nodeSyntaxKind: ts.SyntaxKind[node.kind],
         parentText: (
             (node.parent && ('text' in node.parent) && typeof node.text === 'string' && node.text) ||
@@ -47,20 +48,4 @@ export const getTSNode = (
         endLine: endPos.line + 1,
         endColumn: endPos.character + 1
     }
-}
-
-const getNodeText = (tsNode: ts.Node, tsSource: ts.SourceFile): string => {
-    if (ts.isJsxElement(tsNode)) {
-        return tsNode.openingElement.tagName.getText(tsSource);
-    }
-
-    if (ts.isJsxSelfClosingElement(tsNode)) {
-        return tsNode.tagName.getText(tsSource);
-    }
-
-    if (ts.isJsxOpeningElement(tsNode)) {
-        return tsNode.tagName.getText(tsSource);
-    }
-
-    return 'text' in tsNode && tsNode.text as string || tsNode.getText(tsSource)
 }

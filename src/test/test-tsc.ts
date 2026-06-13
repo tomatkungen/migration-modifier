@@ -7,7 +7,8 @@ import { TS_AST } from "../ast-typescript/ts_ast";
 // import { pr_ts_folder_struct } from "../print/pr_ts_folder_struct";
 
 // Path to the tsconfig.json file
-const tsConfigPath = path.resolve("tsconfig.json")
+// const tsConfigPath = path.resolve("tsconfig.json")
+const tsConfigPath = path.resolve('..', 'shark-bone-git','frontend', 'tsconfig.app.json')
 // const tsConfigPath = path.resolve('..', 'github-desktop-git', "tsconfig.json");
 
 // Create a new TS_AST instance

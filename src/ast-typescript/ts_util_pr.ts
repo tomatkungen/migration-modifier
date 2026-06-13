@@ -35,7 +35,10 @@ export class TS_UTIL_PR {
 
     public prParseReactTree(): void {
         pr_ts_react_struct(
-            ts_react_struct_tree(this.tsProgram)
+            ts_react_struct_tree(
+                this.tsProgram,
+                this.tsConfigPath
+            )
         )
     }
 }

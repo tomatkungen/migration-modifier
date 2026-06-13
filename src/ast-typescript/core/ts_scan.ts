@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { getTSNode, TS_NODES } from "./ts_node";
+import { ts_node, TS_NODES } from "./ts_node";
 import { ts_is_node } from "./ts_is_node";
 
 export const ts_scan = (
@@ -12,7 +12,7 @@ export const ts_scan = (
 ) => {
 
     if (ts_is_node(node, syntaxKinds)) 
-        tsNodes.push(getTSNode(
+        tsNodes.push(ts_node(
             filePath,
             node as ts.LiteralLikeNode,
             sourceFile,
