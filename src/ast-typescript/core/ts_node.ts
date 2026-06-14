@@ -1,6 +1,7 @@
 import ts from "typescript";
 import { ts_node_text } from "./ts_node_text";
-import { ts_node_return_type } from "./ts_node_return_type";
+import { ts_node_var_return_type } from "./ts_node_var_return_type";
+import { ts_node_var_export } from "./ts_node_var_export";
 
 export type TS_NODE = {
     filePath: string;
@@ -54,8 +55,8 @@ export const ts_node = (
         endLine: endPos.line + 1,
         endColumn: endPos.character + 1,
         nodeMetadata: {
-            returnType: ts_node_return_type(node, checker),
-            isExported: false
+            returnType: ts_node_var_return_type(node, checker),
+            isExported: ts_node_var_export(node, checker)
         }
     }
 }

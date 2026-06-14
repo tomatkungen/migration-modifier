@@ -1,5 +1,6 @@
 import ts from "typescript";
 import { ts_node_text } from "./ts_node_text";
+import { ts_node_var_export } from "./ts_node_var_export";
 
 /**
  * initializer Variable declaration types
@@ -16,7 +17,7 @@ import { ts_node_text } from "./ts_node_text";
  *
  * @returns NODE_TS
 */
-export const ts_node_return_type = (ts_node: ts.Node, checker: ts.TypeChecker): string | undefined => {
+export const ts_node_var_return_type = (ts_node: ts.Node, checker: ts.TypeChecker): string | undefined => {
     if (!ts.isVariableDeclaration(ts_node) || !ts_node.initializer) return;
 
     // Get the type of the initializer
@@ -53,7 +54,7 @@ export const ts_scan_react = (checker: ts.TypeChecker,/*tsProgram: ts.Program,*/
         }
 
         if (ts.isVariableDeclaration(childNode)) {
-            const returnType = ts_node_return_type(childNode, checker);
+            const returnType = ts_node_var_return_type(childNode, checker);
             if (returnType) {
 
                 console.log(
@@ -61,7 +62,9 @@ export const ts_scan_react = (checker: ts.TypeChecker,/*tsProgram: ts.Program,*/
                     '2:',
                     childNode.name.getText(),
                     "=>",
-                    returnType
+                    returnType,
+                    'export',
+                    ts_node_var_export(childNode, checker)
                 );
                 console.log('------')
             }

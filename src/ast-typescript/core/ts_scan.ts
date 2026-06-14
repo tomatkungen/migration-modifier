@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { ts_node, TS_NODES } from "./ts_node";
 import { ts_is_node } from "./ts_is_node";
-import { ts_scan_react } from "./ts_node_return_type";
+// import { ts_scan_react } from "./ts_node_var_return_type";
 
 export const ts_scan = (
     node: ts.Node,
@@ -22,7 +22,7 @@ export const ts_scan = (
             parentNode as ts.LiteralLikeNode
         ));
 
-        ts_scan_react(tsChecker, node, sourceFile)
+        // ts_scan_react(tsChecker, node, sourceFile)
 
     ts.forEachChild(node, (childNode) =>
         ts_scan(childNode, filePath, tsNodes, syntaxKinds,sourceFile, tsChecker, node));
