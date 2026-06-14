@@ -4,7 +4,8 @@ import { TS_NODES } from "./core/ts_node";
 
 export class TS_RULES {
 
-    private tsSourceFile: readonly ts.SourceFile[]
+    private tsSourceFile: readonly ts.SourceFile[];
+    private tsProgrram: ts.Program;
     private tsNodes: TS_NODES; // { [filePath: string]: string[] } = {};
 
     public static tsSyntaxKind: (keyof typeof ts.SyntaxKind)[] = [
@@ -13,8 +14,9 @@ export class TS_RULES {
         'ImportClause'
     ]
 
-    constructor(tsSourceFile: readonly ts.SourceFile[]) {
+    constructor(tsSourceFile: readonly ts.SourceFile[], tsProgram: ts.Program) {
         this.tsSourceFile = tsSourceFile;
+        this.tsProgrram = tsProgram;
         this.tsNodes = [];
     }
 
@@ -33,6 +35,7 @@ export class TS_RULES {
                 tempNodes,
                 syntaxKinds,
                 sourceFile,
+                this.tsProgrram.getTypeChecker()
             );
 
             // Add start and end line and column

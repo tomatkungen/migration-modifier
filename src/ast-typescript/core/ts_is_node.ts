@@ -16,6 +16,8 @@ export const ts_is_node = (
             return ts.isNoSubstitutionTemplateLiteral(tsNode);
         case 'ImportClause':
             return ts.isImportClause(tsNode);
+        case 'VariableDeclaration': 
+            return ts.isVariableDeclaration(tsNode);
         default:
             return false;
     }

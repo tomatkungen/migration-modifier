@@ -43,7 +43,7 @@ export class TS_AST {
             this.tsProgram
         )
 
-        return new TS_RULES(tsSourceFiles)
+        return new TS_RULES(tsSourceFiles, this.tsProgram)
     }
 
     public searchFile(fileNames: string[]): TS_RULES {
@@ -54,7 +54,7 @@ export class TS_AST {
             )
         )
 
-        return new TS_RULES(tsSourceFiles)
+        return new TS_RULES(tsSourceFiles, this.tsProgram)
     }                                                                   
 
     public getParsedConfigFiles(): string[] {

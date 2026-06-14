@@ -3,10 +3,10 @@ import ts from "typescript";
 import { TS_NODES } from "../ast-typescript/core/ts_node";
 import { ts_source_files } from "../ast-typescript/core/ts_source_files";
 import { ts_scan } from "../ast-typescript/core/ts_scan";
-import { ts_scan_react } from "../ast-typescript/core/ts_scan_react";
 
 export const ts_react_struct_tree = (tsProgram: ts.Program, tsConfigPath: string) => {
     const tsSourceFiles = ts_source_files(tsProgram);
+    const tsChecker = tsProgram.getTypeChecker();
 
     const tsNodes: TS_NODES = [];
 
@@ -14,18 +14,18 @@ export const ts_react_struct_tree = (tsProgram: ts.Program, tsConfigPath: string
     for (const tsSourceFile of tsSourceFiles) {
         if (!tsSourceFile.fileName.endsWith('.tsx'))
             continue;
-        console.log('filename', tsSourceFile.fileName)
+// console.log(tsSourceFile.fileName);
         ts_scan(
             tsSourceFile,
             tsSourceFile.fileName,
             tsNodes,
-            ['JsxOpeningElement', 'JsxSelfClosingElement'],
-            tsSourceFile
+            [ 'VariableDeclaration'],
+            tsSourceFile,
+            tsChecker
         )
-
-        ts_scan_react(tsProgram, tsSourceFile, tsSourceFile)
     }
 
+    // Remove absolute path and keep relative to tsconfig
     for (const tsNode of tsNodes) {
         tsNode.filePath = tsNode.filePath.replace(path.dirname(tsConfigPath), '')
     }

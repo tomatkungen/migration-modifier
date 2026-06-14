@@ -1,5 +1,6 @@
 import ts from "typescript";
 import { ts_node_text } from "./ts_node_text";
+import { ts_node_return_type } from "./ts_node_return_type";
 
 export type TS_NODE = {
     filePath: string;
@@ -13,6 +14,10 @@ export type TS_NODE = {
     startColumn: number;
     endLine: number;
     endColumn: number;
+    nodeMetadata: {
+        returnType?: string,
+        isExported: boolean;
+    }
 }
 
 export type TS_NODES = TS_NODE[];
@@ -21,6 +26,7 @@ export const ts_node = (
     filePath: string,
     node: ts.LiteralLikeNode,
     sourceFile: ts.SourceFile,
+    checker: ts.TypeChecker,
     parentNode?: ts.LiteralLikeNode,
 ): TS_NODE => {
     // Get Code line number in file 
@@ -46,6 +52,10 @@ export const ts_node = (
         startLine: startPos.line + 1,
         startColumn: startPos.character + 1,
         endLine: endPos.line + 1,
-        endColumn: endPos.character + 1
+        endColumn: endPos.character + 1,
+        nodeMetadata: {
+            returnType: ts_node_return_type(node, checker),
+            isExported: false
+        }
     }
 }

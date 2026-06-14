@@ -13,5 +13,9 @@ export const ts_node_text = (tsNode: ts.Node, tsSource: ts.SourceFile): string =
         return tsNode.tagName.getText(tsSource);
     }
 
+    if (ts.isVariableDeclaration(tsNode)) {
+        return tsNode.name.getText();
+    }
+
     return 'text' in tsNode && tsNode.text as string || tsNode.getText(tsSource)
 }
