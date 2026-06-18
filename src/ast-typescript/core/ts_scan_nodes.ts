@@ -3,7 +3,7 @@ import { ts_node, TS_NODES } from "./ts_node";
 import { ts_is_node } from "./ts_is_node";
 // import { ts_scan_react } from "./ts_node_var_return_type";
 
-export const ts_scan = (
+export const ts_scan_nodes = (
     node: ts.Node,
     filePath: string,
     tsNodes: TS_NODES,
@@ -11,7 +11,7 @@ export const ts_scan = (
     sourceFile: ts.SourceFile,
     tsChecker: ts.TypeChecker,
     parentNode?: ts.Node,
-) => {
+): void => {
 
     if (ts_is_node(node, syntaxKinds)) 
         tsNodes.push(ts_node(
@@ -25,7 +25,7 @@ export const ts_scan = (
         // ts_scan_react(tsChecker, node, sourceFile)
 
     ts.forEachChild(node, (childNode) =>
-        ts_scan(childNode, filePath, tsNodes, syntaxKinds,sourceFile, tsChecker, node));
+        ts_scan_nodes(childNode, filePath, tsNodes, syntaxKinds,sourceFile, tsChecker, node));
 }
 
 // @deprecated use ts_is_node instead

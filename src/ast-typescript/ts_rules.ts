@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ts_scan } from "./core/ts_scan";
+import { ts_scan_nodes } from "./core/ts_scan_nodes";
 import { TS_NODES } from "./core/ts_node";
 
 export class TS_RULES {
@@ -29,7 +29,7 @@ export class TS_RULES {
 
             const tempNodes: TS_NODES = [];
             // const fileStrings: string[] = [];
-            ts_scan(
+            ts_scan_nodes(
                 sourceFile,
                 sourceFile.fileName,
                 tempNodes,

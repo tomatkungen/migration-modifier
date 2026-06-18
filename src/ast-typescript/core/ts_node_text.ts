@@ -17,5 +17,9 @@ export const ts_node_text = (tsNode: ts.Node, tsSource: ts.SourceFile): string =
         return tsNode.name.getText();
     }
 
+    if (ts.isFunctionDeclaration(tsNode) && tsNode.name) {
+        return tsNode.name.getText();
+    }
+
     return 'text' in tsNode && tsNode.text as string || tsNode.getText(tsSource)
 }

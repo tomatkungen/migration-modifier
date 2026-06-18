@@ -18,6 +18,8 @@ export const ts_is_node = (
             return ts.isImportClause(tsNode);
         case 'VariableDeclaration': 
             return ts.isVariableDeclaration(tsNode);
+        case 'FunctionDeclaration':
+            return ts.isFunctionDeclaration(tsNode);
         default:
             return false;
     }
