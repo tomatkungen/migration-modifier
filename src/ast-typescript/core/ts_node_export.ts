@@ -48,10 +48,10 @@ const ts_node_fun_export = (tsNode: ts.Node, tsChecker: ts.TypeChecker, tsSource
     if (!ts.isFunctionDeclaration(tsNode))
         return false;
 
-    // Case 1: direct export keyword
+    // Case 1: direct export keyword - export function App()
     if (isNodeExported(tsNode)) return true;
 
-    // Case 2: exported via export list or default export
+    // Case 2: exported via export list or default export - export function App()
     const symbol = tsChecker.getSymbolAtLocation(tsNode.name!);
     if (!symbol) return false;
 

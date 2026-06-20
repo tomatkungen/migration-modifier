@@ -3,11 +3,29 @@ import { ts_node_export } from "./ts_node_export";
 
 export const ts_node_return_type = (ts_node: ts.Node, checker: ts.TypeChecker): string | undefined => {
 
+    if (ts.isVariableDeclaration(ts_node) && ts.isCatchClause(ts_node.parent))
+        return ts_node_catch_clause(ts_node.parent, checker);
+
     if (ts.isVariableDeclaration(ts_node))
         return ts_node_variable_declaration(ts_node, checker)
 
     if (ts.isFunctionDeclaration(ts_node))
         return ts_node_function_declaration(ts_node, checker)
+}
+
+const ts_node_catch_clause = (tsNode: ts.Node, tsChecker: ts.TypeChecker) => {
+    if (!ts.isCatchClause(tsNode))
+        return;
+
+    const variable = tsNode.variableDeclaration;
+    if (!variable) return undefined;
+
+    const symbol = tsChecker.getSymbolAtLocation(variable.name);
+    if (!symbol) return undefined;
+
+    const tsType = tsChecker.getTypeOfSymbolAtLocation(symbol, variable.name);
+
+    return tsChecker.typeToString(tsType);
 }
 
 /**
@@ -27,6 +45,19 @@ export const ts_node_return_type = (ts_node: ts.Node, checker: ts.TypeChecker): 
 */
 const ts_node_variable_declaration = (tsNode: ts.Node, tsChecker: ts.TypeChecker): string | undefined => {
     if (!ts.isVariableDeclaration(tsNode) || !tsNode.initializer) return;
+
+    /*
+        function foo() { return { x: 123 }; }
+        const a = foo(); // foo() the initializer as callExpression
+    */
+    if (ts.isCallExpression(tsNode.initializer)) {
+        const signature = tsChecker.getResolvedSignature(tsNode.initializer);
+
+        if (signature) {
+            const returnType = tsChecker.getReturnTypeOfSignature(signature);
+            return tsChecker.typeToString(returnType)
+        }
+    }
 
     // Get the type of the initializer
     const type = tsChecker.getTypeAtLocation(tsNode.initializer);
