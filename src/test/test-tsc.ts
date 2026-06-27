@@ -19,7 +19,7 @@ const tsEngine = new TS_AST(tsConfigPath);
 
 // tsEngine.getUtil().prParseConfigFoldersFile();
 
-tsEngine.getUtilPrint().prParseReactTree();
+tsEngine.getUtilPrint().prParseConfigReactTree();
 
 // const filePath = path.resolve('..', 'github-desktop-git','app', 'src', 'models','account.ts')
 

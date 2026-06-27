@@ -14,6 +14,8 @@ export class TS_AST {
     // 
     private tsProgram: ts.Program;
 
+    private tsTypeChecker: ts.TypeChecker;
+
     private ts_util_pr: TS_UTIL_PR;
 
     constructor(tsConfigPath: string) {
@@ -21,11 +23,13 @@ export class TS_AST {
         this.tsConfigPath = tsConfigPath;
         this.tsParseCommandLine = this.tsParseConfig(tsConfigPath);
         this.tsProgram = ts.createProgram(this.tsParseCommandLine.fileNames, this.tsParseCommandLine.options)
-        
+        this.tsTypeChecker = this.tsProgram.getTypeChecker();
+
         this.ts_util_pr = new TS_UTIL_PR(
             this.tsParseCommandLine,
             this.tsConfigPath,
-            this.tsProgram
+            this.tsProgram,
+            this.tsTypeChecker
         );
     }
 

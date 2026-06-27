@@ -1,7 +1,7 @@
 import ts from "typescript";
-import { ts_node_text } from "./ts_node_text";
-import { ts_node_return_type } from "./ts_node_return_type";
-import { ts_node_export } from "./ts_node_export";
+import { ts_node_text } from "./ts_node/ts_node_text";
+import { ts_node_return_type } from "./ts_node/ts_node_return_type";
+import { ts_node_export } from "./ts_node/ts_node_export";
 
 export type TS_NODE = {
     filePath: string;
