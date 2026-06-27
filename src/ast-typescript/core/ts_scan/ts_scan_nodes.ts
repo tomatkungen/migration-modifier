@@ -1,6 +1,6 @@
 import ts from "typescript";
-import { ts_node, TS_NODES } from "./ts_node";
-import { ts_is_node } from "./ts_node/ts_is_node";
+import { ts_node, TS_NODES } from "../ts_node";
+import { ts_is_node } from "../ts_node/ts_is_node";
 // import { ts_scan_react } from "./ts_node_var_return_type";
 
 export const ts_scan_nodes = (

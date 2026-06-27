@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ts_scan_nodes } from "./core/ts_scan_nodes";
+import { ts_scan_nodes } from "./core/ts_scan/ts_scan_nodes";
 import { TS_NODES } from "./core/ts_node";
 
 export class TS_RULES {

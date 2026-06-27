@@ -1,4 +1,5 @@
 import ts from "typescript";
+import { TS_NODE } from "./ts_node";
 
 export type TS_REACT_FILE = {
     tsFunExports: string[];
@@ -19,32 +20,29 @@ const TS_SYNTAX_ELEMENT_KIND = ['JsxSelfClosingElement', 'JsxOpeningElement']
 
 export const ts_react_file = (
     tsReactFile: TS_REACT_FILE,
-    isExported: boolean,
-    returnType: string,
-    tsSyntaxKind: keyof typeof ts.SyntaxKind,
-    nodeText: string
+    tsNode: TS_NODE,
 ) => {
 
     // export const tt: Element
-    if (isExported && tsSyntaxKind === 'VariableDeclaration' && TS_REACT_SYNTAX_KINDS.includes(returnType))
-        tsReactFile.tsVarExports.push(nodeText)
+    if (tsNode.nodeMetadata.isExported && tsNode.nodeSyntaxKind === 'VariableDeclaration' && TS_REACT_SYNTAX_KINDS.includes(tsNode.nodeMetadata.returnType ?? ""))
+        tsReactFile.tsVarExports.push(tsNode.nodeText)
 
     // const tt: Element
-    if (!isExported && tsSyntaxKind === 'VariableDeclaration' && TS_REACT_SYNTAX_KINDS.includes(returnType))
-        tsReactFile.tsVarLocals.push(nodeText)
+    if (!tsNode.nodeMetadata.isExported && tsNode.nodeSyntaxKind === 'VariableDeclaration' && TS_REACT_SYNTAX_KINDS.includes(tsNode.nodeMetadata.returnType ?? ""))
+        tsReactFile.tsVarLocals.push(tsNode.nodeText)
 
     // export function app (): Element {}
-    if (isExported && tsSyntaxKind === 'FunctionDeclaration' && TS_REACT_SYNTAX_KINDS.includes(returnType))
-        tsReactFile.tsFunExports.push(nodeText)
+    if (tsNode.nodeMetadata.isExported && tsNode.nodeSyntaxKind === 'FunctionDeclaration' && TS_REACT_SYNTAX_KINDS.includes(tsNode.nodeMetadata.returnType ?? ""))
+        tsReactFile.tsFunExports.push(tsNode.nodeText)
 
     // <tt> | <tt />
-    if (TS_SYNTAX_ELEMENT_KIND.includes(tsSyntaxKind))
-        tsReactFile.tsElement.push(nodeText)
+    if (TS_SYNTAX_ELEMENT_KIND.includes(tsNode.nodeSyntaxKind))
+        tsReactFile.tsElement.push(tsNode.nodeText)
 
     tsReactFile.sum += `
     ---
-            ${isExported}: isExported,
-            ${returnType}: returnType,
-            ${tsSyntaxKind}: tsSyntaxKind,
-            ${nodeText}: nodeText`
+            isExported:   ${tsNode.nodeMetadata.isExported}
+            returnType:   ${tsNode.nodeMetadata.returnType},
+            tsSyntaxKind: ${tsNode.nodeSyntaxKind},
+            nodeText:     ${tsNode.nodeText}`
 }

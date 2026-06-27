@@ -1,5 +1,5 @@
-import { TS_NODES } from "./ts_node";
-import { ts_react_file, TS_RECT_FILES } from "./ts_react_file";
+import { TS_NODES } from "../ts_node";
+import { ts_react_file, TS_RECT_FILES } from "../ts_react_file";
 
 export const ts_scan_react_files = (
     tsNodes: TS_NODES,
@@ -10,14 +10,19 @@ export const ts_scan_react_files = (
             (tsSourceFile.tsFilepath === tsNode.filePath))
 
         if (index === -1)
-            tsFileReact.push({tsFunExports: [], tsFunLocals: [], tsVarExports: [], tsVarLocals: [], tsElement: [], tsFilepath: tsNode.filePath, sum: "" })
+            tsFileReact.push({
+                tsFunExports: [],
+                tsFunLocals: [],
+                tsVarExports: [],
+                tsVarLocals: [],
+                tsElement: [],
+                tsFilepath: tsNode.filePath,
+                sum: ""
+            })
 
         ts_react_file(
             tsFileReact[index === -1 ? tsFileReact.length - 1 : index],
-            tsNode.nodeMetadata.isExported,
-            tsNode.nodeMetadata.returnType ?? "",
-            tsNode.nodeSyntaxKind,
-            tsNode.nodeText
+            tsNode
         )
 
         return tsFileReact;
