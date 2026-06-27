@@ -12,8 +12,8 @@ export const ts_node_return_type = (tsNode: ts.Node, tsTypeChecker: ts.TypeCheck
     if (ts.isFunctionDeclaration(tsNode))
         return ts_node_function_declaration(tsNode, tsTypeChecker)
 
-    if (ts.isJsxSelfClosingElement(tsNode) || ts.isJsxOpeningElement(tsNode))
-        return ts_node_jsx_element(tsNode)
+    // if (ts.isJsxSelfClosingElement(tsNode) || ts.isJsxOpeningElement(tsNode))
+    //     return ts_node_jsx_element(tsNode)
 }
 
 
@@ -165,7 +165,7 @@ export const ts_scan_react = (tsTypeChecker: ts.TypeChecker,/*tsProgram: ts.Prog
                     "=>",
                     returnType,
                     'export',
-                    ts_node_export(childNode, tsTypeChecker)
+                    ts_node_export(childNode, tsTypeChecker, tsSource)
                 );
                 console.log('------')
             }

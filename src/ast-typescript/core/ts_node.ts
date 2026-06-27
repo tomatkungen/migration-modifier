@@ -6,7 +6,7 @@ import { ts_node_export } from "./ts_node_export";
 export type TS_NODE = {
     filePath: string;
     nodeText: string;
-    nodeSyntaxKind: string;
+    nodeSyntaxKind: keyof typeof ts.SyntaxKind; //string;
     parentText: string;
     parentSyntaxKind: string;
     start: number;
@@ -37,7 +37,7 @@ export const ts_node = (
     return {
         filePath,
         nodeText: ts_node_text(node, tsSourceFile),
-        nodeSyntaxKind: ts.SyntaxKind[node.kind],
+        nodeSyntaxKind: ts.SyntaxKind[node.kind] as keyof typeof ts.SyntaxKind,
         parentText: (
             (node.parent && ('text' in node.parent) && typeof node.text === 'string' && node.text) ||
             (parentNode && ('text' in parentNode) && typeof parentNode.text === 'string' && parentNode.text) ||
