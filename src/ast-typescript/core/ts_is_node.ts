@@ -6,19 +6,19 @@ export const ts_is_node = (
 ) => (syntaxKinds.some((syntaxKind) => {
     
     switch (syntaxKind) {
-        case 'JsxOpeningElement':
+        case 'JsxOpeningElement':       // <elem>
             return ts.isJsxOpeningElement(tsNode)
-        case 'JsxSelfClosingElement':
+        case 'JsxSelfClosingElement':   // <elem />
             return ts.isJsxSelfClosingElement(tsNode);
-        case 'StringLiteral':
+        case 'StringLiteral':           // "test"
             return ts.isStringLiteral(tsNode);
         case 'NoSubstitutionTemplateLiteral':
             return ts.isNoSubstitutionTemplateLiteral(tsNode);
         case 'ImportClause':
             return ts.isImportClause(tsNode);
-        case 'VariableDeclaration': 
+        case 'VariableDeclaration':     // const <var> = <initater>
             return ts.isVariableDeclaration(tsNode);
-        case 'FunctionDeclaration':
+        case 'FunctionDeclaration':     // myFunc() {}
             return ts.isFunctionDeclaration(tsNode);
         default:
             return false;

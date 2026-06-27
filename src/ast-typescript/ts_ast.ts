@@ -61,6 +61,6 @@ export class TS_AST {
         return (!this.tsParseCommandLine ? [] : this.tsParseCommandLine.fileNames)
     }
 
-    public getUtil(): TS_UTIL_PR { return this.ts_util_pr; }
+    public getUtilPrint(): TS_UTIL_PR { return this.ts_util_pr; }
 }
 
